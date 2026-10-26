@@ -55,7 +55,7 @@
     const groups = (collection.subcategories || []).map(group => {
       const entries = children.filter(w => effectiveSubcategoryId(w) === group.id);
       return `<div class="misc-group">
-        <div class="misc-group-heading"><strong>${esc(group.title)}</strong><span>${entries.length ? esc(String(entries.length)) + ' 部已收錄' : '待收錄'}</span></div>
+        <div class="misc-group-heading"><strong>${esc(group.title)}</strong><span>${entries.length ? esc(String(entries.length)) + ' 部已收錄' : ''}</span></div>
         ${entries.length ? entries.map(subworkHtml).join('') : ''}
       </div>`;
     });
@@ -72,13 +72,13 @@
       ? miscWorksHtml(collection, children)
       : children.length
         ? `<div class="work-sublist"><p class="work-sublist-title">收錄作品 / ${children.length}</p>${children.map(subworkHtml).join('')}</div>`
-        : '<p class="work-no-records">此分類尚無已勾選「總站顯示」的作品，或尚未完成第一次 Notion 同步。</p>';
+        : '';
     return `<article class="work-card accent-${esc(collection.accent || 'navy')} ${online ? '' : 'is-planned'}">
       <div class="work-top"><span class="work-number">${esc(collection.index)}</span><span class="work-state">${online ? '● 已有作品網站' : '○ 系列分類'}</span></div>
       <h3>${esc(collection.title)}</h3><p class="work-english">${esc(collection.english || '')}</p>
       <p class="work-copy">${esc(collection.summary || '')}</p>
       ${sublist}
-      <div class="work-bottom"><span class="work-tag">${esc(kindLabel(collection))}</span>${online ? `<a class="work-action" href="${esc(siteUrl)}" target="_blank" rel="noopener noreferrer">前往系列網站 <span>↗</span></a>` : '<span class="work-tag">尚未提供系列網站</span>'}</div>
+      <div class="work-bottom"><span class="work-tag">${esc(kindLabel(collection))}</span>${online ? `<a class="work-action" href="${esc(siteUrl)}" target="_blank" rel="noopener noreferrer">前往系列網站 <span>↗</span></a>` : ''}</div>
     </article>`;
   }
 

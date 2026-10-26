@@ -1,20 +1,22 @@
-# 文學總站｜《四手聯彈，兩首奏鳴曲》與《八分音符》分層修正
+# 文學總資料庫｜作品卡片文字精簡
 
-## 本次正確的資料關係
+這次只修改文字顯示，不更動 Notion API、作品 ID、分類對應或公開章節索引。
 
-- **總站原著分類**：四手聯彈，兩首奏鳴曲；英文顯示名稱 `Four Hands, Two Sonatas`。
-- **原著分類下的個人作品**：八分音符；英文顯示名稱 `Quaver`；作品識別碼維持 `quaver`。
-- Notion `原著分類` 填「四手聯彈，兩首奏鳴曲」，`系列名稱` 可以保留原本二創系列名稱，不需要改動識別碼。
-- 如果 Notion 作品頁面目前仍叫 `Quaver`，請將**作品名**改成 `八分音符`，`英文顯示名稱` 保留 `Quaver`，同步後總站子作品才會顯示「八分音符 / Quaver」。不要修改 `作品識別碼`。
+- `app.js`：移除作品卡片裡「此分類尚無已勾選『總站顯示』的作品，或尚未完成第一次 Notion 同步。」提示。沒有作品時保留分類卡片與簡介，不顯示系統空狀態。
+- `app.js`：「綜合作品」的空子分類不再顯示「待收錄」，沒有系列網站的卡片不再顯示「尚未提供系列網站」的冗餘文字。
+- `data/collections.json`：《四手聯彈，兩首奏鳴曲》的簡介正式改成「以《四手聯彈，兩首奏鳴曲》為原著的二次創作分類」。其他分類簡介完全保留。
+- `index.html`：將 app.js 快取版本提高，方便部署後載入修正。
 
-## 上傳檔案
+## 上傳
 
-覆蓋 `Eliasxin/tk-literary-library` 的 `main` 分支對應路徑：
+將三個檔案覆蓋至 `Eliasxin/tk-literary-library` 的 `main` 分支相同路徑：
 
-1. `data/collections.json`：修正原著分類卡片的中文與英文顯示名，保留「四手聯彈」等 Notion 分類別名及五個綜合作品子分類。
-2. `scripts/sync_notion_works.py`：保留既有同步程式，支援完整原著名稱與歷史別名。
-3. `tests/test_works.py`：新增原著分類與個人作品分離的驗證測試。
+- `app.js`
+- `index.html`
+- `data/collections.json`
 
-**請勿覆蓋 `data/works.json` 與 `data/public-index.json`**，兩者是正式同步輸出。
+請不要覆蓋 `data/works.json` 或 `data/public-index.json`，以保留既有的 Notion 已同步作品資料與公開篇章索引。
 
-上傳後先等 Cloudflare Pages 自動更新分類標題。若有在 Notion 改動作品名或勾選「總站顯示」，再手動執行 `Sync Notion Work Catalog`。未勾選的作品不會匯出，沒有公開文章也不會產生小說正文。
+## 關於預計新增的 Notion「簡介」欄位
+
+**本次尚不啟用此欄位**。等你新增欄位並提供內容後，再修改 `scripts/sync_notion_works.py` 與 `app.js`，讓網站適當讀取作者自己撰寫的簡介。這次其他簡介維持原樣，不會自動被覆蓋。
