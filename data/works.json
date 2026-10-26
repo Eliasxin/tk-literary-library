@@ -1,4 +1,42 @@
 {
-  "status": "awaiting_first_notion_sync",
-  "works": []
+  "status": "ready",
+  "updatedAt": "2026-10-26T15:59:47.668288+00:00",
+  "works": [
+    {
+      "id": "unknown_shorts",
+      "collectionId": "unknown",
+      "title": "短篇集",
+      "english": "Unknown Short Stories",
+      "status": "online",
+      "url": "https://unknown-archive.pages.dev/",
+      "order": 7
+    },
+    {
+      "id": "song_maketh_wingman",
+      "collectionId": "top-gun",
+      "title": "Song Maketh Wingman",
+      "english": "Song Maketh Wingman",
+      "status": "online",
+      "url": "https://top-gun-archive.pages.dev/",
+      "order": 1
+    },
+    {
+      "id": "turbulence",
+      "collectionId": "top-gun",
+      "title": "Where Wake Turbulence Ends",
+      "english": "Where Wake Turbulence Ends",
+      "status": "online",
+      "url": "https://top-gun-archive.pages.dev/",
+      "order": 1
+    },
+    {
+      "id": "globetrotting",
+      "collectionId": "top-gun",
+      "title": "時空交錯的旅行｜Globetrotting",
+      "english": "Globetrotting",
+      "status": "online",
+      "url": "https://top-gun-archive.pages.dev/",
+      "order": 1
+    }
+  ]
 }
