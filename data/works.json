@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "updatedAt": "2026-10-26T16:02:41.963257+00:00",
+  "updatedAt": "2026-10-26T16:53:32.448775+00:00",
   "works": [
     {
       "id": "the_distance_between_us",
@@ -9,7 +9,7 @@
       "english": "The Distance Between Us",
       "status": "online",
       "url": "https://unknown-archive.pages.dev/",
-      "order": 7
+      "order": 6
     },
     {
       "id": "unknown_shorts",
@@ -18,7 +18,7 @@
       "english": "Unknown Short Stories",
       "status": "online",
       "url": "https://unknown-archive.pages.dev/",
-      "order": 7
+      "order": 6
     },
     {
       "id": "love_casting",
@@ -64,6 +64,24 @@
       "status": "online",
       "url": "https://top-gun-archive.pages.dev/",
       "order": 1
+    },
+    {
+      "id": "bittersweet",
+      "collectionId": "shin-ji",
+      "title": "苦盡甘來未必來",
+      "english": "Double Shuffle",
+      "status": "planned",
+      "url": null,
+      "order": 7
+    },
+    {
+      "id": "quaver",
+      "collectionId": "four-hands",
+      "title": "Quaver",
+      "english": "Quaver",
+      "status": "planned",
+      "url": null,
+      "order": 8
     }
   ]
 }
