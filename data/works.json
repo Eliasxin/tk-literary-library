@@ -1,7 +1,16 @@
 {
   "status": "ready",
-  "updatedAt": "2026-10-26T15:59:47.668288+00:00",
+  "updatedAt": "2026-10-26T16:02:41.963257+00:00",
   "works": [
+    {
+      "id": "the_distance_between_us",
+      "collectionId": "unknown",
+      "title": "The Distance Between Us",
+      "english": "The Distance Between Us",
+      "status": "online",
+      "url": "https://unknown-archive.pages.dev/",
+      "order": 7
+    },
     {
       "id": "unknown_shorts",
       "collectionId": "unknown",
@@ -10,6 +19,15 @@
       "status": "online",
       "url": "https://unknown-archive.pages.dev/",
       "order": 7
+    },
+    {
+      "id": "love_casting",
+      "collectionId": "love-casting",
+      "title": "戀愛 Casting",
+      "english": "Love Casting",
+      "status": "online",
+      "url": "https://love-casting.pages.dev/",
+      "order": 5
     },
     {
       "id": "song_maketh_wingman",
@@ -34,6 +52,15 @@
       "collectionId": "top-gun",
       "title": "時空交錯的旅行｜Globetrotting",
       "english": "Globetrotting",
+      "status": "online",
+      "url": "https://top-gun-archive.pages.dev/",
+      "order": 1
+    },
+    {
+      "id": "top_gun_random_writings",
+      "collectionId": "top-gun",
+      "title": "隨寫系列",
+      "english": "Informal essay",
       "status": "online",
       "url": "https://top-gun-archive.pages.dev/",
       "order": 1
