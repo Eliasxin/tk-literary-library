@@ -1,0 +1,234 @@
+{
+  "collections": [
+    {
+      "id": "eternal-butler",
+      "index": "01",
+      "title": "全面管控",
+      "english": "Eternal Butler",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "以《全面管控》為背景的作品專區。",
+      "aliases": [
+        "全面管控",
+        "Eternal Butler"
+      ],
+      "chaptersSource": null,
+      "accent": "navy"
+    },
+    {
+      "id": "summer-secret",
+      "index": "02",
+      "title": "夏日最後的秘密",
+      "english": "Summer Blue Hour",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "夏日與青春題材的作品收藏。",
+      "aliases": [
+        "夏日最後的秘密",
+        "Summer Blue Hour"
+      ],
+      "chaptersSource": null,
+      "accent": "sage"
+    },
+    {
+      "id": "blue-youth",
+      "index": "03",
+      "title": "路過我年少時光的藍色",
+      "english": "Blue Canvas of Youthful Days",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "關於青春、陪伴與成長的作品。",
+      "aliases": [
+        "路過我年少時光的藍色",
+        "Blue Canvas of Youthful Days"
+      ],
+      "chaptersSource": null,
+      "accent": "blue"
+    },
+    {
+      "id": "opposites",
+      "index": "04",
+      "title": "對立而已",
+      "english": "Fight for You",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "在矛盾與靠近之間的故事。",
+      "aliases": [
+        "對立而已",
+        "Fight for You"
+      ],
+      "chaptersSource": null,
+      "accent": "rose"
+    },
+    {
+      "id": "misc",
+      "index": "05",
+      "title": "綜合作品",
+      "english": "Miscellaneous Works",
+      "type": "mixed",
+      "status": "planned",
+      "url": null,
+      "summary": "不屬於特定原著的創作與跨作品短篇。",
+      "aliases": [
+        "綜合作品",
+        "綜合",
+        "其他作品"
+      ],
+      "chaptersSource": null,
+      "accent": "navy"
+    },
+    {
+      "id": "first-note",
+      "index": "06",
+      "title": "彈一場完美戀愛",
+      "english": "First Note of Love",
+      "type": "fanfiction",
+      "status": "online",
+      "url": "https://first-note-of-love.pages.dev/",
+      "summary": "收錄《戀習曲》等以《彈一場完美戀愛》為背景的創作。",
+      "aliases": [
+        "彈一場完美戀愛",
+        "戀習曲",
+        "First Note of Love"
+      ],
+      "chaptersSource": "first-note",
+      "accent": "sage"
+    },
+    {
+      "id": "unknown",
+      "index": "07",
+      "title": "關於未知的我們",
+      "english": "Unknown",
+      "type": "fanfiction",
+      "status": "online",
+      "url": "https://unknown-archive.pages.dev/",
+      "summary": "包含《The Distance Between Us》連載與多篇獨立短篇。",
+      "aliases": [
+        "關於未知的我們",
+        "Unknown"
+      ],
+      "chaptersSource": "unknown",
+      "accent": "blue"
+    },
+    {
+      "id": "love-casting",
+      "index": "08",
+      "title": "戀愛 Casting",
+      "english": "Love Casting",
+      "type": "original",
+      "status": "online",
+      "url": "https://love-casting.pages.dev/",
+      "summary": "原創綜藝劇情及衍生故事。",
+      "aliases": [
+        "戀愛 Casting",
+        "戀愛Casting",
+        "Love Casting"
+      ],
+      "chaptersSource": "love-casting",
+      "accent": "rose"
+    },
+    {
+      "id": "heated-rivalry",
+      "index": "09",
+      "title": "Heated Rivalry",
+      "english": "Heated Rivalry",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "Heated Rivalry 相關創作。",
+      "aliases": [
+        "Heated Rivalry"
+      ],
+      "chaptersSource": null,
+      "accent": "navy"
+    },
+    {
+      "id": "jimmyohm",
+      "index": "10",
+      "title": "JimmyOhm",
+      "english": "JimmyOhm",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "JimmyOhm 創作收藏。",
+      "aliases": [
+        "JimmyOhm",
+        "Jimmy Ohm"
+      ],
+      "chaptersSource": null,
+      "accent": "sage"
+    },
+    {
+      "id": "rwrb",
+      "index": "11",
+      "title": "RWRB",
+      "english": "Red, White & Royal Blue",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "Red, White & Royal Blue 相關創作。",
+      "aliases": [
+        "RWRB",
+        "王室緋聞守則",
+        "Red White & Royal Blue",
+        "Red, White & Royal Blue"
+      ],
+      "chaptersSource": null,
+      "accent": "blue"
+    },
+    {
+      "id": "top-gun",
+      "index": "12",
+      "title": "Top Gun",
+      "english": "Stories Beyond the Sky",
+      "type": "fanfiction",
+      "status": "online",
+      "url": "https://top-gun-archive.pages.dev/",
+      "summary": "航空故事總站及其多篇獨立長篇。",
+      "aliases": [
+        "Top Gun",
+        "TopGun",
+        "Top Gun 二創總站"
+      ],
+      "chaptersSource": "top-gun",
+      "accent": "rose"
+    },
+    {
+      "id": "top-form",
+      "index": "13",
+      "title": "TopForm",
+      "english": "Top Form",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "TopForm 相關創作。",
+      "aliases": [
+        "TopForm",
+        "Top Form"
+      ],
+      "chaptersSource": null,
+      "accent": "navy"
+    },
+    {
+      "id": "healing-pet",
+      "index": "14",
+      "title": "療癒你的寵物",
+      "english": "Healing Your Pet",
+      "type": "translation",
+      "status": "planned",
+      "url": null,
+      "summary": "《Healing Your Pet》翻譯作品。",
+      "aliases": [
+        "療癒你的寵物",
+        "Healing Your Pet",
+        "Healing your pet"
+      ],
+      "chaptersSource": null,
+      "accent": "sage"
+    }
+  ]
+}

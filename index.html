@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#191f24">
+  <meta name="description" content="SAKURAI_TK 的文學作品總資料庫。從一座書庫，抵達每一個故事。">
+  <title>SAKURAI_TK — 文學總資料庫</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=2">
+  <script defer src="./app.js?v=2"></script>
+</head>
+<body>
+  <a class="skip" href="#collections">跳至作品目錄</a>
+  <header class="topbar">
+    <a href="#top" class="brand" aria-label="SAKURAI_TK 文學總資料庫首頁"><span class="brand-emblem">S<span class="star">✶</span></span><span><strong>SAKURAI_TK</strong><small>THE LITERARY ARCHIVE</small></span></a>
+    <nav aria-label="主要導覽" class="header-links"><a href="#collections">作品書架</a><a href="#index">篇章索引</a></nav>
+    <span class="header-mark" aria-hidden="true">EST. 2026&nbsp; / &nbsp; ARCHIVE</span>
+  </header>
+  <main id="top">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-main">
+        <div class="eyebrow"><span class="glyph">✦</span> AN INDEX OF STORIES &amp; WORLDS <span class="hairline"></span> 001—∞</div>
+        <p class="over-title">給所有未曾被時間收走的故事。</p>
+        <h1 id="hero-title">一座書庫，<br><em>所有宇宙。</em></h1>
+        <p class="hero-en">THE LITERARY<br>ATLAS OF <span>SAKURAI_TK</span></p>
+        <p class="hero-description">每一個故事都有自己的座標。<br>在這裡找到它，然後翻開屬於它的篇章。</p>
+        <a class="primary-link" href="#collections">探索作品書架 <span>↗</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="starfield"><span>✧</span><span>✦</span><span>·</span><span>✧</span></div>
+        <div class="orb orb-back"></div><div class="orb orb-front"></div>
+        <div class="orb-ring"></div><div class="orbit-line orbit-one"></div><div class="orbit-line orbit-two"></div>
+        <p class="art-label art-top">ARCHIVE / VOL. 001</p><p class="art-label art-bottom">WORDS EXIST<br>BEYOND THE PAGE.</p>
+      </div>
+      <div class="hero-foot"><span>DOCUMENTING STORIES, NOT SPOILERS.</span><span>SCROLL TO EXPLORE ↓</span></div>
+    </section>
+    <section class="library-section" id="collections">
+      <div class="shell">
+        <div class="section-header"><div><p class="section-label"><span>01</span> / THE BOOKSHELF</p><h2>作品書架 <i>Collected Works</i></h2></div><p class="section-note">依原著分類整理作品；每個分類下可收錄多部故事。總站只負責索引，不取代各站的閱讀功能。</p></div>
+        <div class="toolbar">
+          <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">搜尋作品名稱</span><input id="workSearch" type="search" placeholder="搜尋作品名稱、系列或關鍵字…" autocomplete="off"></label>
+          <div class="filters" role="group" aria-label="作品篩選">
+            <button type="button" data-filter="all" aria-pressed="true">全部作品</button>
+            <button type="button" data-filter="fanfiction" aria-pressed="false">二次創作</button>
+            <button type="button" data-filter="original" aria-pressed="false">原創作品</button>
+            <button type="button" data-filter="translation" aria-pressed="false">翻譯作品</button><button type="button" data-filter="mixed" aria-pressed="false">綜合作品</button><button type="button" data-filter="planned" aria-pressed="false">籌備中</button>
+          </div>
+        </div>
+        <div class="work-grid" id="workGrid" aria-live="polite"><p class="empty">正在載入作品書架…</p></div>
+        <p class="library-note">＊ 作品分類與總站收錄由 Notion「總站顯示」控制；未完成的作品只保留分類入口，不讀取或複製草稿正文。</p>
+      </div>
+    </section>
+    <section class="index-section" id="index"><div class="shell">
+      <div class="section-header"><div><p class="section-label"><span>02</span> / THE READING INDEX</p><h2>公開篇章 <i>Reading Index</i></h2></div><p class="section-note">從各網站的 GitHub 公開資料建立目錄，不另行保存小說正文。</p></div>
+      <div class="index-inner">
+        <div class="index-control">
+          <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">搜尋公開文章</span><input id="chapterSearch" type="search" placeholder="搜尋篇名、作品、CP…" autocomplete="off"></label>
+          <label class="select-wrap"><span class="sr-only">選擇作品</span><select id="chapterWork"><option value="all">所有作品</option></select></label>
+        </div>
+        <div class="index-count" id="chapterCount" aria-live="polite"></div>
+        <div class="chapter-list" id="chapterList" aria-live="polite"><p class="empty">公開篇章索引尚待第一次同步。</p></div>
+      </div>
+      </div>
+    </section>
+    <section class="closing shell"><span class="closing-icon" aria-hidden="true">✦</span><blockquote>「即使在不同的世界裡，<br>文字仍能讓我們相遇。」</blockquote><span>THE STORIES ARE STILL BEING WRITTEN.</span></section>
+  </main>
+  <footer class="footer"><div class="shell footer-grid"><div><strong>SAKURAI_TK <span>✦</span> THE LITERARY ARCHIVE</strong><p>不同故事，同一座文學書庫。</p></div><div><a href="#collections">所有作品</a><a href="#index">公開篇章</a><a href="#top">回到首頁 ↑</a></div></div><p class="shell footer-note">此站為個人作品索引。各同人作品及原作名稱的相關權利歸其權利人所有，本站並非官方網站。</p></footer>
+  <noscript><p class="noscript">此網站需要 JavaScript 才能載入作品及篇章目錄。</p></noscript>
+</body>
+</html>
