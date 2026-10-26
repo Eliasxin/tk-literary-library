@@ -1,0 +1,56 @@
+
+name: Sync Notion Work Catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 每天台灣時間上午 11:00
+    - cron: '0 3 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sakurai-notion-catalog
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out catalog
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test grouping rules
+        run: |
+          python -m unittest discover \
+            -s tests \
+            -p 'test_*.py' \
+            -v
+
+      - name: Export opted-in Notion works only
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_WORKS_DATABASE_ID: ${{ secrets.NOTION_WORKS_DATABASE_ID }}
+          NOTION_WORKS_DATA_SOURCE_ID: ${{ secrets.NOTION_WORKS_DATA_SOURCE_ID }}
+        run: python scripts/sync_notion_works.py
+
+      - name: Commit only public catalog metadata
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          git add -A -- data/works.json
+
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh public literary works catalog'
+            git push
+          else
+            echo 'No catalog changes.'
+          fi
