@@ -72,8 +72,68 @@ def key(value: str) -> str:
     return ''.join(c for c in value if c.isalnum())
 
 
+# 已確認的 Notion 原著分類與總站分類 ID。此處保留最重要的
+# 相容性別名，避免只更新 Python、漏覆蓋 collections.json 時 Quaver 同步中斷。
+# 顯示文字仍以 data/collections.json 為準，不會把私有草稿公開。
+FIXED_CATEGORY_ALIASES = {
+    'four-hands': (
+        '四手聯彈', '四手联弹', '四手聯彈，兩首奏鳴曲',
+        '四手聯彈、兩首奏鳴曲', '四手聯彈 兩首奏鳴曲',
+        '四手聯彈：兩首奏鳴曲', '八分音符', 'Quaver',
+        'Four Hands, Two Sonatas',
+    ),
+    'shin-ji': ('心機', '心机', 'Double Shuffle', 'SHIN JI: Double Shuffle'),
+    'rwrb': ('RWRB', '王室緋聞守則', 'Red, White & Royal Blue'),
+    'first-note': ('彈一場完美戀愛', '戀習曲', 'First Note of Love'),
+}
+
+FIXED_MISC_SUBCATEGORY_ALIASES = {
+    'summer-secret': ('夏日最後的秘密', 'Summer Blue Hour'),
+    'blue-youth': ('路過我年少時光的藍色', 'Blue Canvas of Youthful Days'),
+    'opposites': ('對立而已', 'Fight for You'),
+    'jimmyohm': ('JimmyOhm', 'Jimmy Ohm'),
+    'top-form': ('TopForm', 'Top Form'),
+}
+
+
+def known_category(candidate: str, categories: list[dict]) -> str | None:
+    normalized = key(candidate)
+    available = {category.get('id') for category in categories}
+    for category_id, aliases in FIXED_CATEGORY_ALIASES.items():
+        if category_id in available and any(normalized == key(alias) for alias in aliases):
+            return category_id
+    return None
+
+
+def misc_subcategory(props: dict, categories: list[dict]) -> str | None:
+    """Resolve formerly top-level labels under 綜合作品 without changing Notion relations.
+
+    Never export a subgroup name or title from a private/unchecked Notion page.
+    """
+    misc = next((category for category in categories if category['id'] == 'misc'), None)
+    if misc is None:
+        return None
+    alias_to_id: dict[str, str] = {}
+    for subgroup in misc.get('subcategories', []):
+        for alias in [subgroup['title'], subgroup['id'], *(subgroup.get('aliases') or [])]:
+            alias_to_id[key(alias)] = subgroup['id']
+    # 兼容舊版 collections.json 的分類別名，且只對存在的子分類生效。
+    enabled = {subgroup.get('id') for subgroup in misc.get('subcategories', [])}
+    for subgroup_id, aliases in FIXED_MISC_SUBCATEGORY_ALIASES.items():
+        if subgroup_id in enabled:
+            for alias in aliases:
+                alias_to_id[key(alias)] = subgroup_id
+    # Original / series are more reliable than a title that resembles a category.
+    for candidate in (plain(props.get('原著分類')), plain(props.get('系列名稱')), plain(props.get('作品名'))):
+        if key(candidate) in alias_to_id:
+            return alias_to_id[key(candidate)]
+    return None
+
+
 def category_for(props: dict, categories: list[dict]) -> str:
-    """Prefer 原著分類. Do not collapse separate stories into parent rows."""
+    """Group designated mixed works under 綜合作品; otherwise prefer 原著分類."""
+    if misc_subcategory(props, categories):
+        return 'misc'
     alias_to_id: dict[str, str] = {}
     for category in categories:
         for alias in [category['title'], category['id'], *(category.get('aliases') or [])]:
@@ -84,6 +144,9 @@ def category_for(props: dict, categories: list[dict]) -> str:
     for candidate in (original, series, title):
         if key(candidate) in alias_to_id:
             return alias_to_id[key(candidate)]
+        fallback = known_category(candidate, categories)
+        if fallback:
+            return fallback
     # Avoid silently hiding new, explicitly opted-in works.
     raise ValueError(f'已勾選總站顯示的作品「{title}」無法判斷原著分類：{original or "(空白)"}。請先在 data/collections.json 設定分類別名。')
 
@@ -100,15 +163,22 @@ def to_work(page: dict, categories: list[dict]) -> dict | None:
         raise ValueError('作品名稱或識別碼超過允許長度。')
     url = allowed_link(props)
     online_flag = plain(props.get('網站狀態')) == '已上線'
-    return {
+    collection_id = category_for(props, categories)
+    record = {
         'id': slug,
-        'collectionId': category_for(props, categories),
+        'collectionId': collection_id,
         'title': title,
         'english': plain(props.get('英文顯示名稱'))[:200],
         'status': 'online' if online_flag and url else 'planned',
         'url': url if online_flag else None,
         'order': order_value(props),
     }
+    # Only include this extra public label for explicitly opted-in mixed works.
+    if collection_id == 'misc':
+        subcategory = misc_subcategory(props, categories)
+        if subcategory:
+            record['subcategoryId'] = subcategory
+    return record
 
 
 def build_works(pages: list[dict], categories: list[dict]) -> list[dict]:

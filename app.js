@@ -14,8 +14,14 @@
     } catch (_) { return null; }
   };
   const kindLabel = work => ({original:'原創作品',fanfiction:'二次創作',translation:'翻譯作品',mixed:'綜合作品'}[work.type] || '作品分類');
+  // Older published JSON may still contain the five former top-level category IDs.
+  // Display those rows under 綜合作品 even before the next Notion sync completes.
+  const miscSubcategoryIds = new Set(['summer-secret','blue-youth','opposites','jimmyohm','top-form']);
+  const effectiveCollectionId = work => miscSubcategoryIds.has(work.collectionId) ? 'misc' : work.collectionId;
+  const effectiveSubcategoryId = work => work.subcategoryId ||
+    (miscSubcategoryIds.has(work.collectionId) ? work.collectionId : null);
   const listedFor = collection => state.works
-    .filter(w => w.collectionId === collection.id)
+    .filter(w => effectiveCollectionId(w) === collection.id)
     .sort((a,b) => (a.order ?? 999999) - (b.order ?? 999999) || a.title.localeCompare(b.title));
 
   function subworkUrl(work) {
@@ -42,15 +48,36 @@
       : `<div class="subwork-item muted"><span>${name}</span><small>尚無公開連結</small></div>`;
   }
 
+  function miscWorksHtml(collection, children) {
+    // Named subcategories remain visible while the user is still preparing Notion rows.
+    // No unpublished title, page body or page ID is exposed as a placeholder.
+    const groupIds = new Set((collection.subcategories || []).map(g => g.id));
+    const groups = (collection.subcategories || []).map(group => {
+      const entries = children.filter(w => effectiveSubcategoryId(w) === group.id);
+      return `<div class="misc-group">
+        <div class="misc-group-heading"><strong>${esc(group.title)}</strong><span>${entries.length ? esc(String(entries.length)) + ' 部已收錄' : '待收錄'}</span></div>
+        ${entries.length ? entries.map(subworkHtml).join('') : ''}
+      </div>`;
+    });
+    const other = children.filter(w => !groupIds.has(effectiveSubcategoryId(w)));
+    if (other.length) groups.push(`<div class="misc-group"><div class="misc-group-heading"><strong>其他綜合創作</strong><span>${other.length} 部已收錄</span></div>${other.map(subworkHtml).join('')}</div>`);
+    return `<div class="work-sublist misc-sublist"><p class="work-sublist-title">綜合作品 / ${collection.subcategories?.length || 0} 個子分類</p>${groups.join('')}</div>`;
+  }
+
   function workHtml(collection) {
     const children = listedFor(collection);
     const siteUrl = safeLink(collection.url);
     const online = collection.status === 'online' && siteUrl;
+    const sublist = collection.id === 'misc'
+      ? miscWorksHtml(collection, children)
+      : children.length
+        ? `<div class="work-sublist"><p class="work-sublist-title">收錄作品 / ${children.length}</p>${children.map(subworkHtml).join('')}</div>`
+        : '<p class="work-no-records">此分類尚無已勾選「總站顯示」的作品，或尚未完成第一次 Notion 同步。</p>';
     return `<article class="work-card accent-${esc(collection.accent || 'navy')} ${online ? '' : 'is-planned'}">
       <div class="work-top"><span class="work-number">${esc(collection.index)}</span><span class="work-state">${online ? '● 已有作品網站' : '○ 系列分類'}</span></div>
       <h3>${esc(collection.title)}</h3><p class="work-english">${esc(collection.english || '')}</p>
       <p class="work-copy">${esc(collection.summary || '')}</p>
-      ${children.length ? `<div class="work-sublist"><p class="work-sublist-title">收錄作品 / ${children.length}</p>${children.map(subworkHtml).join('')}</div>` : '<p class="work-no-records">此分類尚無已勾選「總站顯示」的作品，或尚未完成第一次 Notion 同步。</p>'}
+      ${sublist}
       <div class="work-bottom"><span class="work-tag">${esc(kindLabel(collection))}</span>${online ? `<a class="work-action" href="${esc(siteUrl)}" target="_blank" rel="noopener noreferrer">前往系列網站 <span>↗</span></a>` : '<span class="work-tag">尚未提供系列網站</span>'}</div>
     </article>`;
   }
@@ -63,6 +90,8 @@
       const children = listedFor(collection);
       const hay = searchText([
         collection.title, collection.english, collection.summary,
+        ...(collection.aliases || []),
+        ...(collection.subcategories || []).flatMap(g => [g.title, g.english, ...(g.aliases || [])]),
         ...children.flatMap(w => [w.title, w.english])
       ].join(' '));
       return matchFilter && (!term || hay.includes(term));

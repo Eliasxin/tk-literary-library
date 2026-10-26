@@ -17,73 +17,74 @@
       "accent": "navy"
     },
     {
-      "id": "summer-secret",
-      "index": "02",
-      "title": "夏日最後的秘密",
-      "english": "Summer Blue Hour",
-      "type": "fanfiction",
-      "status": "planned",
-      "url": null,
-      "summary": "夏日與青春題材的作品收藏。",
-      "aliases": [
-        "夏日最後的秘密",
-        "Summer Blue Hour"
-      ],
-      "chaptersSource": null,
-      "accent": "sage"
-    },
-    {
-      "id": "blue-youth",
-      "index": "03",
-      "title": "路過我年少時光的藍色",
-      "english": "Blue Canvas of Youthful Days",
-      "type": "fanfiction",
-      "status": "planned",
-      "url": null,
-      "summary": "關於青春、陪伴與成長的作品。",
-      "aliases": [
-        "路過我年少時光的藍色",
-        "Blue Canvas of Youthful Days"
-      ],
-      "chaptersSource": null,
-      "accent": "blue"
-    },
-    {
-      "id": "opposites",
-      "index": "04",
-      "title": "對立而已",
-      "english": "Fight for You",
-      "type": "fanfiction",
-      "status": "planned",
-      "url": null,
-      "summary": "在矛盾與靠近之間的故事。",
-      "aliases": [
-        "對立而已",
-        "Fight for You"
-      ],
-      "chaptersSource": null,
-      "accent": "rose"
-    },
-    {
       "id": "misc",
-      "index": "05",
+      "index": "02",
       "title": "綜合作品",
       "english": "Miscellaneous Works",
       "type": "mixed",
       "status": "planned",
       "url": null,
-      "summary": "不屬於特定原著的創作與跨作品短篇。",
+      "summary": "跨影視作品與不同配對的短篇收藏；包含五個子分類。",
       "aliases": [
         "綜合作品",
         "綜合",
-        "其他作品"
+        "其他作品",
+        "Mixed Works",
+        "Miscellaneous Works"
       ],
       "chaptersSource": null,
-      "accent": "navy"
+      "accent": "navy",
+      "subcategories": [
+        {
+          "id": "summer-secret",
+          "title": "夏日最後的秘密",
+          "english": "Summer Blue Hour",
+          "aliases": [
+            "夏日最後的秘密",
+            "Summer Blue Hour"
+          ]
+        },
+        {
+          "id": "blue-youth",
+          "title": "路過我年少時光的藍色",
+          "english": "Blue Canvas of Youthful Days",
+          "aliases": [
+            "路過我年少時光的藍色",
+            "Blue Canvas of Youthful Days"
+          ]
+        },
+        {
+          "id": "opposites",
+          "title": "對立而已",
+          "english": "Fight for You",
+          "aliases": [
+            "對立而已",
+            "Fight for You"
+          ]
+        },
+        {
+          "id": "jimmyohm",
+          "title": "JimmyOhm",
+          "english": "JimmyOhm",
+          "aliases": [
+            "JimmyOhm",
+            "Jimmy Ohm"
+          ]
+        },
+        {
+          "id": "top-form",
+          "title": "TopForm",
+          "english": "Top Form",
+          "aliases": [
+            "TopForm",
+            "Top Form"
+          ]
+        }
+      ]
     },
     {
       "id": "first-note",
-      "index": "06",
+      "index": "03",
       "title": "彈一場完美戀愛",
       "english": "First Note of Love",
       "type": "fanfiction",
@@ -100,7 +101,7 @@
     },
     {
       "id": "unknown",
-      "index": "07",
+      "index": "04",
       "title": "關於未知的我們",
       "english": "Unknown",
       "type": "fanfiction",
@@ -116,7 +117,7 @@
     },
     {
       "id": "love-casting",
-      "index": "08",
+      "index": "05",
       "title": "戀愛 Casting",
       "english": "Love Casting",
       "type": "fanfiction",
@@ -133,7 +134,7 @@
     },
     {
       "id": "heated-rivalry",
-      "index": "09",
+      "index": "06",
       "title": "Heated Rivalry",
       "english": "Heated Rivalry",
       "type": "fanfiction",
@@ -147,42 +148,28 @@
       "accent": "navy"
     },
     {
-      "id": "jimmyohm",
-      "index": "10",
-      "title": "JimmyOhm",
-      "english": "JimmyOhm",
-      "type": "fanfiction",
-      "status": "planned",
-      "url": null,
-      "summary": "JimmyOhm 創作收藏。",
-      "aliases": [
-        "JimmyOhm",
-        "Jimmy Ohm"
-      ],
-      "chaptersSource": null,
-      "accent": "sage"
-    },
-    {
       "id": "rwrb",
-      "index": "11",
-      "title": "RWRB",
-      "english": "Red, White & Royal Blue",
+      "index": "07",
+      "title": "Red, White & Royal Blue",
+      "english": "王室緋聞守則",
       "type": "fanfiction",
       "status": "planned",
       "url": null,
-      "summary": "Red, White & Royal Blue 相關創作。",
+      "summary": "《Red, White & Royal Blue》相關創作與衍生篇章。",
       "aliases": [
         "RWRB",
         "王室緋聞守則",
         "Red White & Royal Blue",
-        "Red, White & Royal Blue"
+        "Red, White & Royal Blue",
+        "RWRB｜Red, White & Royal Blue",
+        "Red, White & Royal Blue（RWRB）"
       ],
       "chaptersSource": null,
       "accent": "blue"
     },
     {
       "id": "top-gun",
-      "index": "12",
+      "index": "08",
       "title": "Top Gun",
       "english": "Stories Beyond the Sky",
       "type": "fanfiction",
@@ -198,24 +185,8 @@
       "accent": "rose"
     },
     {
-      "id": "top-form",
-      "index": "13",
-      "title": "TopForm",
-      "english": "Top Form",
-      "type": "fanfiction",
-      "status": "planned",
-      "url": null,
-      "summary": "TopForm 相關創作。",
-      "aliases": [
-        "TopForm",
-        "Top Form"
-      ],
-      "chaptersSource": null,
-      "accent": "navy"
-    },
-    {
       "id": "healing-pet",
-      "index": "14",
+      "index": "09",
       "title": "療癒你的寵物",
       "english": "Healing Your Pet",
       "type": "translation",
@@ -226,6 +197,50 @@
         "療癒你的寵物",
         "Healing Your Pet",
         "Healing your pet"
+      ],
+      "chaptersSource": null,
+      "accent": "sage"
+    },
+    {
+      "id": "shin-ji",
+      "index": "10",
+      "title": "心機",
+      "english": "Double Shuffle",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "《心機》（Double Shuffle）相關作品。",
+      "aliases": [
+        "心機",
+        "心机",
+        "SHIN JI: Double Shuffle",
+        "Double Shuffle",
+        "Xin Ji"
+      ],
+      "chaptersSource": null,
+      "accent": "rose"
+    },
+    {
+      "id": "four-hands",
+      "index": "11",
+      "title": "八分音符",
+      "english": "Quaver",
+      "type": "fanfiction",
+      "status": "planned",
+      "url": null,
+      "summary": "《八分音符》（Quaver）作品專區；收錄以《四手聯彈》為原著分類的創作。",
+      "aliases": [
+        "四手聯彈，兩首奏鳴曲",
+        "四手聯彈",
+        "Four Hands, Two Sonatas",
+        "Four Hands",
+        "포핸즈",
+        "八分音符",
+        "Quaver",
+        "四手联弹",
+        "四手聯彈、兩首奏鳴曲",
+        "四手聯彈 兩首奏鳴曲",
+        "四手聯彈：兩首奏鳴曲"
       ],
       "chaptersSource": null,
       "accent": "sage"

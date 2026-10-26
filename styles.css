@@ -11,3 +11,12 @@
 
 /* V2: parent category -> listed Notion works */
 .work-card{min-height:330px}.work-card .work-sublist{margin:20px 0 18px;border-top:1px solid #e5e0d8;padding-top:13px}.work-sublist-title{font-size:10px;letter-spacing:.13em;color:#917c68;margin-bottom:8px}.subwork-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid #eee9e1;font-size:13px;color:#283a40}.subwork-item:hover{color:#9c754b}.subwork-item strong{font-weight:600}.subwork-item small{display:block;color:#8a8f8b;font-size:10px}.subwork-item .arrow{color:#967d5c}.subwork-item.muted{color:#82908f}.work-card .work-count{margin-top:9px;font-size:11px;color:#697b78}.work-card .work-bottom{margin-top:auto}.work-card .work-no-records{font-size:12px;color:#8a8c85;margin:19px 0;line-height:1.7}
+
+/* Literary Archive V3 — nested mixed-work classifications */
+.misc-sublist{display:grid;gap:7px}
+.misc-group{border-bottom:1px solid #eee9e1;padding:5px 0 11px}
+.misc-group:last-child{border-bottom:0}
+.misc-group-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:#273b42}
+.misc-group-heading strong{font-weight:600}
+.misc-group-heading span{font-size:10px;color:#918b82;white-space:nowrap}
+.misc-group .subwork-item{padding-left:9px;border-left:2px solid #cfc4b4;margin-top:7px}
