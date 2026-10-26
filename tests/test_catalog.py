@@ -36,7 +36,26 @@ class PublicIndexTests(unittest.TestCase):
 
     def test_first_note_route(self):
         work={'id':'first-note','title':'戀習曲','url':'https://first-note-of-love.pages.dev/'}
-        self.assertEqual(mod.normalize('first-note', work, [{'slug':'story-1','title':'A'}])[0]['readUrl'], 'https://first-note-of-love.pages.dev/#/story/story-1')
+        self.assertEqual(mod.normalize('first-note', work, [{'id':'story-1','order':1,'title':'A','status':'已發布','published':True}])[0]['readUrl'], 'https://first-note-of-love.pages.dev/')
+
+    def test_first_note_without_slug_indexed(self):
+        work = {'id':'first-note','title':'彈一場完美戀愛','url':'https://first-note-of-love.pages.dev/'}
+        rows = [{'id':'100','order':12,'title':'勇氣','published':True,'status':'已發布',
+                 'cp':['Neil × Sea'], 'content':'正文不應進索引'}]
+        result = mod.normalize('first-note',work,rows)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]['title'], '勇氣')
+        self.assertEqual(result[0]['section'], '戀習曲')
+        self.assertEqual(result[0]['workId'], 'first-note')
+        self.assertNotIn('content', result[0])
+
+    def test_first_note_drafts_not_indexed(self):
+        work = {'id':'first-note','title':'彈一場完美戀愛','url':'https://first-note-of-love.pages.dev/'}
+        rows = [{'id':'1','order':1,'title':'草稿','published':False,'status':'草稿'},
+                {'id':'2','order':2,'title':'網站私密','published':False,'status':'已發布'},
+                {'id':'3','order':3,'title':'發布不合','published':True,'status':'草稿'},
+                {'id':'4','order':4,'title':'未註記公開','status':'已發布'}]
+        self.assertEqual(mod.normalize('first-note',work,rows), [])
 
     def test_love_casting_route(self):
         work={'id':'love-casting','title':'戀愛 Casting','url':'https://love-casting.pages.dev/'}

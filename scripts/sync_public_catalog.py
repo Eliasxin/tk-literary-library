@@ -58,7 +58,8 @@ def public_rows(payload: Any) -> list[dict]:
 
 def is_visible(row: dict) -> bool:
     """Extra safety for exporters that happen to include an explicit visibility field."""
-    if row.get('isPublic') is False or row.get('websitePublic') is False or row.get('網站公開') is False:
+    if (row.get('isPublic') is False or row.get('websitePublic') is False
+            or row.get('網站公開') is False or row.get('published') is False):
         return False
     status = row.get('status', row.get('發布狀態'))
     if status is not None:
@@ -70,12 +71,15 @@ def is_visible(row: dict) -> bool:
 
 
 def make_url(work_id: str, row: dict, base_url: str) -> str | None:
+    # First Note of Love uses its article `id`/`order` and opens its reader
+    # in a JavaScript dialog. The current archived reader has no verified
+    # chapter-specific URL: link to the working site rather than invent one.
+    if work_id == 'first-note':
+        return base_url
     slug = str(row.get('slug', '')).strip()
     if not SLUG.fullmatch(slug):
         return None
     slug = urllib.parse.quote(slug, safe='')
-    if work_id == 'first-note':
-        return f'{base_url}#/story/{slug}'
     if work_id == 'love-casting':
         return f'{base_url}#/read/{slug}'
     if work_id in ('top-gun', 'unknown'):
@@ -92,6 +96,13 @@ def normalize(source_id: str, work: dict, rows: list[dict]) -> list[dict]:
     if not base_url.startswith('https://') or not base_url.endswith('.pages.dev/'):
         raise ValueError(f'Unsupported site URL for {source_id}')
     for row in rows:
+        # The First Note site's own reader requires BOTH fields. Mirror that
+        # exact rule so its drafts never enter the cross-site public index.
+        if source_id == 'first-note' and not (
+            row.get('published') is True and
+            str(row.get('status', '')).strip() in ('已發布', '已發佈')
+        ):
+            continue
         if not is_visible(row):
             continue
         title = str(row.get('title') or '').strip()
@@ -109,6 +120,8 @@ def normalize(source_id: str, work: dict, rows: list[dict]) -> list[dict]:
         elif source_id == 'top-gun':
             section = {'song_maketh_wingman': 'Song Maketh Wingman',
                        'top_gun_random_writings': '隨寫系列'}.get(section, '')
+        elif source_id == 'first-note':
+            section = '戀習曲'
         else:
             section = ''
         result.append({
