@@ -63,3 +63,7 @@ python -m http.server 8000
 ```
 
 Open `http://localhost:8000/` in a browser. The 14 categories show immediately. The subwork lists remain empty until you run the first GitHub Notion sync.
+
+## User-specific setup
+
+See [`START-HERE-繁體中文.md`](START-HERE-繁體中文.md) for the confirmed works database ID, GitHub Secrets, Cloudflare settings, and instructions for updating an existing repository safely.
