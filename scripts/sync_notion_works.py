@@ -181,6 +181,29 @@ def get_pages(token: str, database_id: str, explicit_source_id: str = '') -> lis
     return rows
 
 
+
+def diagnostic_first_note(pages: list[dict], records: list[dict]) -> None:
+    """Diagnose one user-approved, already-public work without exposing private records.
+
+    Print only presence and checkbox status for the known public catalog work.
+    Never print page IDs, tokens, unchecked row names, or their metadata.
+    """
+    expected_slug = 'first-note-of-love'
+    matches = [
+        page for page in pages
+        if plain((page.get('properties') or {}).get('作品識別碼')) == expected_slug
+    ]
+    print(f'Catalog diagnostic / First Note of Love / present in query: {bool(matches)}')
+    if matches:
+        props = matches[0].get('properties') or {}
+        setting = props.get('總站顯示') or {}
+        print(f'Catalog diagnostic / First Note of Love / display property exists: {"總站顯示" in props}')
+        print(f'Catalog diagnostic / First Note of Love / display property is checkbox: {setting.get("type") == "checkbox"}')
+        print(f'Catalog diagnostic / First Note of Love / display checkbox true: {checked(props, "總站顯示")}')
+    print(f'Catalog diagnostic / First Note of Love / exported: {any(work["id"] == expected_slug for work in records)}')
+    print(f'Catalog diagnostic / total records not opted in: {sum(not checked(page.get("properties") or {}, "總站顯示") for page in pages)}')
+
+
 def main() -> None:
     token = os.environ.get('NOTION_TOKEN', '').strip()
     database_id = os.environ.get('NOTION_WORKS_DATABASE_ID', '').strip().replace('-', '')
@@ -191,6 +214,7 @@ def main() -> None:
     categories = catalog['collections']
     pages = get_pages(token, database_id, data_source_id)
     records = build_works(pages, categories)
+    diagnostic_first_note(pages, records)
     prior = None
     if OUTPUT_PATH.exists():
         try:
