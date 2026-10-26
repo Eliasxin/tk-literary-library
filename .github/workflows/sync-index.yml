@@ -2,7 +2,7 @@
 name: Sync Public Reading Index
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
   schedule:
     - cron: '30 3 * * *'
 
@@ -27,7 +27,11 @@ jobs:
           python-version: '3.12'
 
       - name: Test index rules
-        run: python -m unittest discover -s tests -p 'test_*.py' -v
+        run: |
+          python -m unittest discover \
+            -s tests \
+            -p 'test_*.py' \
+            -v
 
       - name: Build public reading index
         run: python scripts/sync_public_catalog.py
