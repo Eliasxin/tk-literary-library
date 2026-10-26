@@ -113,8 +113,8 @@ class WorkGroupingTests(unittest.TestCase):
         by_id = {c['id']: c for c in self.collections}
         self.assertEqual(by_id['shin-ji']['title'], '心機')
         self.assertEqual(by_id['shin-ji']['english'], 'Double Shuffle')
-        self.assertEqual(by_id['four-hands']['title'], '八分音符')
-        self.assertEqual(by_id['four-hands']['english'], 'Quaver')
+        self.assertEqual(by_id['four-hands']['title'], '四手聯彈，兩首奏鳴曲')
+        self.assertEqual(by_id['four-hands']['english'], 'Four Hands, Two Sonatas')
         self.assertEqual(by_id['rwrb']['title'], 'Red, White & Royal Blue')
         self.assertNotIn('（RWRB）', by_id['rwrb']['title'])
         self.assertIn('RWRB', by_id['rwrb']['aliases'])
@@ -126,6 +126,19 @@ class WorkGroupingTests(unittest.TestCase):
         # This work's Notion checkbox is currently unchecked; do not index it yet.
         self.assertIsNone(mod.to_work(mock_page('Quaver', 'quaver', '四手聯彈', False), self.collections))
 
+    def test_four_hands_category_is_distinct_from_quaver_work(self):
+        category = next(c for c in self.collections if c['id'] == 'four-hands')
+        self.assertEqual(category['title'], '四手聯彈，兩首奏鳴曲')
+        self.assertEqual(category['english'], 'Four Hands, Two Sonatas')
+        page = mock_page('八分音符', 'quaver', '四手聯彈，兩首奏鳴曲')
+        page['properties']['英文顯示名稱'] = rt('Quaver')
+        entry = mod.to_work(page, self.collections)
+        self.assertEqual(entry['collectionId'], 'four-hands')
+        self.assertEqual(entry['title'], '八分音符')
+        self.assertEqual(entry['english'], 'Quaver')
+        self.assertEqual(entry['id'], 'quaver')
+        self.assertFalse(any(x['id'] == 'quaver' for x in self.collections))
+
     def test_bitter_sweet_double_shuffle(self):
         work = mod.to_work(mock_page('苦盡甘來未必來', 'bittersweet', '心機'), self.collections)
         self.assertEqual(work['collectionId'], 'shin-ji')
@@ -135,7 +148,7 @@ class WorkGroupingTests(unittest.TestCase):
         copies = copy.deepcopy(self.collections)
         collection = next(c for c in copies if c['id'] == 'four-hands')
         collection['aliases'] = []
-        # 複製一個舊版 JSON：名稱尚未改成「八分音符」也必須能正常同步
+        # 即使舊版 JSON 標題為英文，仍能辨識 Notion 內的原著分類
         collection['title'] = 'Four Hands, Two Sonatas'
         page = mock_page('Quaver', 'quaver', '四手聯彈')
         self.assertEqual(mod.to_work(page, copies)['collectionId'], 'four-hands')
