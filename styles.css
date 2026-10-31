@@ -20,3 +20,6 @@
 .misc-group-heading strong{font-weight:600}
 .misc-group-heading span{font-size:10px;color:#918b82;white-space:nowrap}
 .misc-group .subwork-item{padding-left:9px;border-left:2px solid #cfc4b4;margin-top:7px}
+
+/* Optional Notion-written public work introductions. */
+.subwork-item .subwork-intro{margin-top:5px;font-size:11px;line-height:1.6;white-space:pre-line;overflow-wrap:anywhere;color:#617179}

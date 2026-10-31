@@ -42,7 +42,7 @@
   function subworkHtml(work) {
     const url = subworkUrl(work);
     const published = work.status === 'online' && url;
-    const name = `<strong>${esc(work.title)}</strong>${work.english && work.english !== work.title ? `<small>${esc(work.english)}</small>` : ''}`;
+    const name = `<strong>${esc(work.title)}</strong>${work.english && work.english !== work.title ? `<small>${esc(work.english)}</small>` : ''}${work.description ? `<small class="subwork-intro">${esc(work.description)}</small>` : ''}`;
     return published
       ? `<a class="subwork-item" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><span>${name}</span><span class="arrow" aria-hidden="true">↗</span></a>`
       : `<div class="subwork-item muted"><span>${name}</span><small>尚無公開連結</small></div>`;

@@ -36,7 +36,7 @@ class PublicIndexTests(unittest.TestCase):
 
     def test_first_note_route(self):
         work={'id':'first-note','title':'戀習曲','url':'https://first-note-of-love.pages.dev/'}
-        self.assertEqual(mod.normalize('first-note', work, [{'id':'story-1','order':1,'title':'A','status':'已發布','published':True}])[0]['readUrl'], 'https://first-note-of-love.pages.dev/')
+        self.assertEqual(mod.normalize('first-note', work, [{'id':'story-1','order':1,'title':'A','status':'已發布','published':True}])[0]['readUrl'], 'https://first-note-of-love.pages.dev/#/read/story-1')
 
     def test_first_note_without_slug_indexed(self):
         work = {'id':'first-note','title':'彈一場完美戀愛','url':'https://first-note-of-love.pages.dev/'}
@@ -48,6 +48,23 @@ class PublicIndexTests(unittest.TestCase):
         self.assertEqual(result[0]['section'], '戀習曲')
         self.assertEqual(result[0]['workId'], 'first-note')
         self.assertNotIn('content', result[0])
+
+    def test_first_note_legacy_order_fallback(self):
+        work={'id':'first-note','title':'戀習曲','url':'https://first-note-of-love.pages.dev/'}
+        rows=[{'order':12,'title':'Encore','published':True,'status':'已發布'}]
+        items=mod.normalize('first-note',work,rows)
+        self.assertEqual(items[0]['readUrl'],'https://first-note-of-love.pages.dev/#/read/12')
+
+    def test_first_note_missing_public_id_not_indexed(self):
+        work={'id':'first-note','title':'戀習曲','url':'https://first-note-of-love.pages.dev/'}
+        rows=[{'title':'Encore','published':True,'status':'已發布'}]
+        self.assertEqual(mod.normalize('first-note',work,rows),[])
+
+    def test_first_note_special_id_encoded(self):
+        work={'id':'first-note','title':'戀習曲','url':'https://first-note-of-love.pages.dev/'}
+        rows=[{'id':'Encore 新篇','title':'Encore','published':True,'status':'已發布'}]
+        self.assertEqual(mod.normalize('first-note',work,rows)[0]['readUrl'],
+            'https://first-note-of-love.pages.dev/#/read/Encore%20%E6%96%B0%E7%AF%87')
 
     def test_first_note_drafts_not_indexed(self):
         work = {'id':'first-note','title':'彈一場完美戀愛','url':'https://first-note-of-love.pages.dev/'}

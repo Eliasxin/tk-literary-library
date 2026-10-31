@@ -71,11 +71,13 @@ def is_visible(row: dict) -> bool:
 
 
 def make_url(work_id: str, row: dict, base_url: str) -> str | None:
-    # First Note of Love uses its article `id`/`order` and opens its reader
-    # in a JavaScript dialog. The current archived reader has no verified
-    # chapter-specific URL: link to the working site rather than invent one.
     if work_id == 'first-note':
-        return base_url
+        # Same published `id`/fallback `order` that the reader's normalize() uses.
+        # No draft or Notion page body is exposed through this index.
+        public_id = str(row.get('id') or row.get('order') or '').strip()
+        if not public_id or len(public_id) > 160 or any(ord(ch) < 32 for ch in public_id):
+            return None
+        return f'{base_url}#/read/{urllib.parse.quote(public_id, safe="")}'
     slug = str(row.get('slug', '')).strip()
     if not SLUG.fullmatch(slug):
         return None

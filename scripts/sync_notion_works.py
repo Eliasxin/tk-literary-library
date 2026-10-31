@@ -173,6 +173,10 @@ def to_work(page: dict, categories: list[dict]) -> dict | None:
         'url': url if online_flag else None,
         'order': order_value(props),
     }
+    # Optional author-written work introduction. No Notion page blocks are queried.
+    description = plain(props.get('簡介')).strip()[:1200]
+    if description:
+        record['description'] = description
     # Only include this extra public label for explicitly opted-in mixed works.
     if collection_id == 'misc':
         subcategory = misc_subcategory(props, categories)
